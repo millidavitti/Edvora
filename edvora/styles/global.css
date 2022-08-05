@@ -7,8 +7,10 @@
 }
 
 main {
+	position: relative;
 	background: #292929;
 	min-height: 100vh;
+	overflow: hidden;
 }
 
 header {
@@ -67,4 +69,12 @@ header {
 
 .filters {
 	position: relative;
+}
+
+.overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+
+	z-index: 1;
 }

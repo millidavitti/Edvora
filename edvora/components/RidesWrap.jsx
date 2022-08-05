@@ -2,18 +2,23 @@ import Ride from "../components/Ride";
 import Rides from "../components/Rides";
 
 /*
-if state is true:
+if only state is set:
    filter objects containing only tthe city and state name 
 
-if city is true:
+if only city is set:
    filter objects containing only tthe city  name 
 
-if bith are true:
+if both are set:
    filter objects containing both tthe city and state name 
 */
-export default function RidesWrap({ code, rides }) {
+export default function RidesWrap({ code, rides, bool, reveal }) {
 	const renderRides = rides.map((ride, id) => (
 		<Ride key={id} ride={ride} code={code} />
 	));
-	return <Rides>{renderRides}</Rides>;
+	return (
+		<Rides>
+			{renderRides}
+			{bool && <div className='overlay' onClick={reveal}></div>}
+		</Rides>
+	);
 }

@@ -38,6 +38,6 @@ export async function getServerSideProps() {
 	}
 
 	return {
-		props: { user, data }, // will be passed to the page component as props
+		props: { user, data },
 	};
 }

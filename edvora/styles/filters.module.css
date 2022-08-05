@@ -5,6 +5,7 @@
 	width: 200px;
 	background: #101010;
 	border-radius: 10px;
+	z-index: 2;
 }
 
 .wrap h2 {
@@ -26,6 +27,7 @@
 }
 
 .style {
+	position: relative;
 	padding: 5px;
 	font-weight: bold;
 	background: #232323;
@@ -33,4 +35,5 @@
 	border-radius: 5px;
 	border: none;
 	cursor: pointer;
+	z-index: 9;
 }

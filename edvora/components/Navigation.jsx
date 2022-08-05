@@ -63,6 +63,8 @@ export default function Navigation({ code, data }) {
 		});
 	};
 
+	const reveal = () => setFilterRevealed(!filterRevealed);
+
 	// Renders
 	const nearestRides = sortRides(code, rides);
 	const upcoming = rides.filter((ride) => Date.parse(ride.date) > Date.now());
@@ -100,18 +102,26 @@ export default function Navigation({ code, data }) {
 					<img
 						src='https://res.cloudinary.com/torch-cms-media/image/upload/v1659735106/filters_yyz6aa.png'
 						alt='filters'
-						onClick={() => setFilterRevealed(!filterRevealed)}
+						onClick={reveal}
 					/>
 					{filterRevealed && (
-						<Filter
-							getCityState={getCityState}
-							cityState={cityState}
-							rides={data}
-						/>
+						<>
+							<div className='overlay'></div>
+							<Filter
+								getCityState={getCityState}
+								cityState={cityState}
+								rides={data}
+							/>
+						</>
 					)}
 				</div>
 			</nav>
-			<RidesWrap code={code} rides={render} />
+			<RidesWrap
+				code={code}
+				rides={render}
+				bool={filterRevealed}
+				reveal={reveal}
+			/>
 		</>
 	);
 }
