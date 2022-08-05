@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { sortRides } from "../helpers";
 import data from "../mock/mockRides";
-import filt from "../assets/filters.png";
 import Filter from "../components/Filter";
 import RidesWrap from "../components/RidesWrap";
+
 export default function Navigation({ code }) {
 	// States
 	const [active, setActiveTab] = useState([
@@ -19,19 +19,27 @@ export default function Navigation({ code }) {
 
 	// Filter Logic
 	let rides = data;
-	if (cityState.city) rides = data.filter((obj) => obj.city === cityState.city);
-	else if (cityState.state)
+	if (cityState.city && !cityState.state)
+		rides = data.filter((obj) => obj.city === cityState.city);
+	else if (cityState.state && !cityState.city)
 		rides = data.filter((obj) => obj.state === cityState.state);
-	else if (cityState.city && cityState.state)
+	else if (cityState.city && cityState.state) {
+		if (
+			!data.some(
+				(obj) => obj.city === cityState.city && obj.state === cityState.state,
+			)
+		)
+			rides = [];
+
 		rides = data.filter(
 			(obj) => obj.city === cityState.city && obj.state === cityState.state,
 		);
+	}
 
 	// Dynamic Styles
 	const underline = {
 		borderBottom: "2px solid #d0cbcb",
 	};
-
 	// Callback Functions
 	const tabFn = (event) => {
 		const {
@@ -39,7 +47,8 @@ export default function Navigation({ code }) {
 		} = event;
 		setActiveTab((pre) =>
 			pre.map((act) => {
-				return id === act.id ? { ...act, set: true } : { ...act, set: false };
+				if (id === act.id) return { ...act, set: true };
+				else return { ...act, set: false };
 			}),
 		);
 	};
@@ -55,11 +64,20 @@ export default function Navigation({ code }) {
 	};
 
 	// Renders
-
 	const nearestRides = sortRides(code, rides);
+	const upcoming = rides.filter((ride) => Date.parse(ride.date) > Date.now());
+	const past = rides.filter((ride) => Date.parse(ride.date) < Date.now());
+
+	let render;
+	active.forEach(({ id, set }) => {
+		if (id === "ur" && set) render = upcoming;
+		else if (id == "nr" && set) render = nearestRides;
+		else if (id == "pr" && set) render = past;
+	});
 
 	const tabs = active.map((obj) => {
 		const active = obj.set ? underline : {};
+
 		if (obj.set)
 			return (
 				<h2 key={obj.id} id={obj.id} onClick={tabFn} style={active}>
@@ -70,7 +88,6 @@ export default function Navigation({ code }) {
 			return (
 				<h2 key={obj.id} id={obj.id} onClick={tabFn}>
 					{obj.name}
-					{`(${4})`}
 				</h2>
 			);
 	});
@@ -81,7 +98,7 @@ export default function Navigation({ code }) {
 				<div className='tabs'>{tabs}</div>
 				<div className='filters'>
 					<img
-						src={filt}
+						src='https://res.cloudinary.com/torch-cms-media/image/upload/v1659735106/filters_yyz6aa.png'
 						alt='filters'
 						onClick={() => setFilterRevealed(!filterRevealed)}
 					/>
@@ -94,7 +111,7 @@ export default function Navigation({ code }) {
 					)}
 				</div>
 			</nav>
-			<RidesWrap code={code} rides={nearestRides} />
+			<RidesWrap code={code} rides={render} />
 		</>
 	);
 }
