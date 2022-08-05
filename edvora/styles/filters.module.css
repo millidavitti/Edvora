@@ -1,0 +1,36 @@
+.filters {
+	position: absolute;
+	right: 0;
+	top: 25px;
+	width: 200px;
+	background: #101010;
+	border-radius: 10px;
+}
+
+.wrap h2 {
+	color: #d0cbcb;
+	font-size: 0.8rem;
+	padding: 10px;
+	border-bottom: 1px solid;
+}
+
+.wrap {
+	padding: 10px;
+}
+
+.options {
+	display: flex;
+	flex-flow: column;
+	gap: 10px;
+	padding: 20px 0;
+}
+
+.style {
+	padding: 5px;
+	font-weight: bold;
+	background: #232323;
+	color: #d0cbcb;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+}

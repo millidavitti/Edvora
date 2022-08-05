@@ -1,0 +1,20 @@
+{
+  "name": "edvora",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/millidavitti/Edvora.git"
+  },
+  "keywords": [],
+  "author": "Donald Abua <abuadonald@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/millidavitti/Edvora/issues"
+  },
+  "homepage": "https://github.com/millidavitti/Edvora#readme"
+}

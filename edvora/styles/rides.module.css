@@ -1,0 +1,60 @@
+.rides {
+	display: flex;
+	flex-flow: column;
+	gap: 20px;
+	padding: 20px;
+}
+.ride {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: 1fr 2fr 1fr;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: #171717;
+}
+
+.thumb {
+	height: 100%;
+	width: 100%;
+	grid-column: 1/2;
+	height: 120px;
+}
+
+.thumb img {
+	border-radius: 10px;
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+.rideInfo {
+	display: flex;
+	flex-flow: column;
+	gap: 5px;
+	color: #d0cbcb;
+	font-size: 0.8rem;
+	grid-column: 2/3;
+}
+
+.rideInfo span {
+	color: white;
+}
+
+.rideCityInfo {
+	display: flex;
+	gap: 20px;
+	margin-left: auto;
+	height: fit-content;
+	grid-column: 3/-1;
+}
+
+.city,
+.state {
+	background-color: #101010;
+	color: white;
+	height: fit-content;
+	margin: auto 0;
+	padding: 7px 10px;
+	border-radius: 10px;
+	font-size: 0.8rem;
+}
