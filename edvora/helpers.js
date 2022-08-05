@@ -1,5 +1,5 @@
 export function sortRides(code, array) {
-	const result = array.map((ride) => ({
+	const result = array?.map((ride) => ({
 		...ride,
 		station_path: nearestRide(code, ride.station_path),
 	}));
@@ -31,16 +31,4 @@ function nearestRide(code, array) {
 		...close.sort((a, b) => Math.abs(code - a) - Math.abs(code - b)),
 		...far.sort((a, b) => Math.abs(code - a) - Math.abs(code - b)),
 	];
-}
-
-export async function getRides() {
-	const res = await fetch("https://assessment.api.vweb.app/rides");
-	const data = await res.json();
-	return data;
-}
-
-export async function getUser() {
-	const res = await fetch("https://assessment.api.vweb.app/user");
-	const data = await res.json();
-	return data;
 }

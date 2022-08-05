@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { sortRides } from "../helpers";
-import data from "../mock/mockRides";
+// import data from "../mock/mockRides";
 import Filter from "../components/Filter";
 import RidesWrap from "../components/RidesWrap";
 
-export default function Navigation({ code }) {
+export default function Navigation({ code, data }) {
 	// States
 	const [active, setActiveTab] = useState([
 		{ id: "nr", name: "Nearest Rides", set: true },

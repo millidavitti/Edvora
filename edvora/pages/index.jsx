@@ -1,9 +1,6 @@
-import { getUser, User } from "../helpers";
-import { user2 } from "../mock/mockUser";
-
 import Navigation from "../components/Navigation";
-export default function Home() {
-	const { name, station_code, url } = user2;
+export default function Home({ user, data }) {
+	const { name, station_code, url } = user;
 
 	return (
 		<main>
@@ -16,7 +13,31 @@ export default function Home() {
 					</div>
 				</div>
 			</header>
-			<Navigation code={station_code} />
+			<Navigation code={station_code} data={data} />
 		</main>
 	);
+}
+
+export async function getServerSideProps() {
+	const res = await fetch("https://assessment.api.vweb.app/user");
+	const user = await res.json();
+
+	const res2 = await fetch("https://assessment.api.vweb.app/rides");
+	const data = await res2.json();
+
+	if (!data) {
+		return {
+			notFound: true,
+		};
+	}
+
+	if (!user) {
+		return {
+			notFound: true,
+		};
+	}
+
+	return {
+		props: { user, data }, // will be passed to the page component as props
+	};
 }
